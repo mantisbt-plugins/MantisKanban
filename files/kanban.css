@@ -1,0 +1,193 @@
+table.kanbanTable {
+		
+}
+table.kanbanTable tr {
+	vertical-align: top;
+}
+table.kanbanTable tr td {
+	width: 250px;
+}
+
+
+#kanbanPage h1 {
+	font: bold 23px Arial, serif;
+	line-height: 27px;
+	margin: 0 0 27px 0;
+	text-align: center;
+}
+
+#kanbanPage h2 {
+	font: bold 14px Arial, serif;
+	line-height: 18px;
+	margin: 0 0 18px 0;
+	text-align: center;
+}
+
+
+
+div.card {
+	background: #f6f6f6 url('/plugins/MantisKanban/files/ticket-corner.jpg') no-repeat right bottom;
+	border-left: 3px solid #999;
+	clear:left;
+	float:left;
+	font: 10px Tahoma, Arial, sans-serif;
+	margin: 0 9px 9px 0;
+	padding: 0;
+	line-height: 13px;
+	width: 109px;
+}
+
+div.card a {
+	text-decoration: none;
+}
+div.card a:hover {
+	text-decoration: underline;
+}
+
+div.card div {
+	margin: 0;
+	padding: 0;
+}
+
+div.card div.owner {
+	background: #999;
+	float:left;
+	margin: 0 0 1px 0;
+	overflow: hidden;
+	padding: 3px 3px 3px 0;
+	text-align: center;
+	width: 106px;
+}
+div.card div.owner a {
+	color: #fff;
+	padding: 0 3px 0 0;
+}
+
+div.card div.owner img {
+	float:left; 
+	margin: 0px 8px 0 0;
+}
+
+div.cardOdd {
+	clear: none;
+	margin: 0 0 9px 0;
+	
+}
+
+
+
+
+div.card div.header {
+	background: #eaeaea url('/plugins/MantisKanban/files/handle.png') no-repeat 86px 9px;
+	float:left;
+	margin: 0 0 0 1px;
+	padding: 0 0 0 9px;
+	width: 99px;
+}
+
+
+div.card div.bugLink {
+	font: bold 11px Tahoma, sans-serif;
+	line-height: 18px;
+}
+div.card div.bugLink a { color: #000; }
+
+
+div.card div.priority {
+	float:left;	
+}
+
+div.card div.priority span.dot {
+	background: #f6f6f6 url('/plugins/MantisKanban/files/priority.png') no-repeat 0 -20px;
+	float:left;
+	display: block;
+	height: 9px;
+	margin: 4px 2px 5px 0;
+	text-indent: -9999px;
+	width: 9px;
+}
+
+div.card div.priority span.dot1 { background-position: 0 0px; }
+
+div.card div.priority span.dot2 { background-position: 0 0px; }
+div.card div.priority10 span.dot2 { background-position: 0 -20px; }
+
+div.card div.priority span.dot3 { background-position: 0 0px; }
+div.card div.priority10 span.dot3, 
+div.card div.priority20 span.dot3 { background-position: 0 -20px; }
+
+div.card div.priority span.dot4 { background-position: 0 -20px; } 
+div.card div.priority60 span.dot4,
+div.card div.priority50 span.dot4,
+div.card div.priority40 span.dot4 { background-position: 0 -10px; }
+
+div.card div.priority span.dot5 { background-position: 0 -20px; } 
+div.card div.priority60 span.dot5,
+div.card div.priority50 span.dot5 { background-position: 0 -10px; }
+
+div.card div.priority span.dot6 { background-position: 0 -20px; }
+div.card div.priority60 span.dot6 { background-position: 0 -10px; }
+
+
+
+div.card div.summary {
+	font: 9px Arial, sans-serif;
+	line-height: 1.5em;
+	overflow: hidden;
+	padding: 9px;
+}
+
+
+
+div.card div.bugTime {
+	font-style:italic;
+	line-height: 18px;
+	text-indent: 12px;
+	position: relative;
+	
+}
+div.card div.bugTime span.fake {
+	border: 5px solid #999;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-right-color: transparent;
+	height: 0;
+	left: 0;
+	
+	position: absolute;
+	top: 4px;
+	width: 0;
+}
+
+
+div.card div.info {
+	line-hegiht: 18px;
+	padding: 4px 9px 5px 9px;	
+} 
+div.card div.info a {
+	margin: 0 5px 0 0;
+}
+
+div.cardBug { border-color: #c00; }
+div.cardBug div.owner { background: #c00; }
+div.cardBug div.bugTime span.fake { border-left-color: #c00; }
+
+div.cardFeature { border-color: #69f; }
+div.cardFeature div.owner { background: #69f; }
+div.cardFeature div.bugTime span.fake { border-left-color: #69f; }
+
+div.cardDesign { border-color: #9c0; }
+div.cardDesign div.owner { background: #9c0; }
+div.cardDesign div.bugTime span.fake { border-left-color: #9c0; }
+
+div.cardEnhancement { border-color: #609; }
+div.cardEnhancement div.owner { background: #609; }
+div.cardEnhancement div.bugTime span.fake { border-left-color: #609; }
+
+
+
+
+
+
+
+

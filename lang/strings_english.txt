@@ -1,0 +1,4 @@
+<?php
+
+$s_plugin_MantisKanban_main_menu_kanban = "Kanban";
+$s_plugin_MantisKanban_kanban_link = "Kanban Board View";
