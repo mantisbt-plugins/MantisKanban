@@ -2,3 +2,23 @@
 
 $s_plugin_MantisKanban_main_menu_kanban = "Kanban";
 $s_plugin_MantisKanban_kanban_link = "Kanban Board View";
+
+$s_view_attachments_for_issue = 'View attachment';
+
+$s_projectdisplay = 'Projects';
+$s_project_nogroups = 'combined';
+$s_project_groups = 'splitted';
+
+$s_sort_date_modified = 'change date';
+$s_sort_priority_link = 'priority';
+
+$s_header_column_1 = 'Not assigned';
+$s_header_column_2 = 'On hold';
+$s_header_column_3 = 'WIP';
+$s_header_column_4 = 'Feedback';
+$s_header_column_5 = 'Test';
+$s_header_column_6 = 'Done';
+$s_header_column_7 = '';
+$s_header_column_8 = '';
+
+$s_confirm_change_status = 'Jetzt Status wechseln?';

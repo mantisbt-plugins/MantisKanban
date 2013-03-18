@@ -1,0 +1,24 @@
+<?php
+
+$s_plugin_MantisKanban_main_menu_kanban = "Kanban";
+$s_plugin_MantisKanban_kanban_link = "Kanban Board Ansicht";
+
+$s_view_attachments_for_issue = 'Attachment anzeigen';
+
+$s_projectdisplay = 'Projekte';
+$s_project_nogroups = 'nicht gruppieren';
+$s_project_groups = 'gruppieren';
+
+$s_sort_date_modified = 'Änderungsdatum';
+$s_sort_priority_link = 'Priorität';
+
+$s_header_column_1 = 'Nicht zugewiesen';
+$s_header_column_2 = 'Zurückgestellt';
+$s_header_column_3 = 'In Arbeit';
+$s_header_column_4 = 'Feedback';
+$s_header_column_5 = 'Test';
+$s_header_column_6 = 'Erledigt';
+$s_header_column_7 = '';
+$s_header_column_8 = '';
+
+$s_confirm_change_status = 'Jetzt Status wechseln?';

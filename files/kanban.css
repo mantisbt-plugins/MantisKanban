@@ -6,6 +6,7 @@ table.kanbanTable tr {
 }
 table.kanbanTable tr td {
 	width: 250px;
+        padding-left: 10px;
 }
 
 
@@ -23,10 +24,12 @@ table.kanbanTable tr td {
 	text-align: center;
 }
 
-
+a.bold, a:active.bold, a:visited.bold, a:hover.bold {
+    font-weight: bold;
+}
 
 div.card {
-	background: #f6f6f6 url('/plugins/MantisKanban/files/ticket-corner.jpg') no-repeat right bottom;
+	background: #f6f6f6 url('ticket-corner.jpg') no-repeat right bottom;
 	border-left: 3px solid #999;
 	clear:left;
 	float:left;
@@ -78,7 +81,7 @@ div.cardOdd {
 
 
 div.card div.header {
-	background: #eaeaea url('/plugins/MantisKanban/files/handle.png') no-repeat 86px 9px;
+	background: #eaeaea url('handle.png') no-repeat 86px 9px;
 	float:left;
 	margin: 0 0 0 1px;
 	padding: 0 0 0 9px;
@@ -98,7 +101,7 @@ div.card div.priority {
 }
 
 div.card div.priority span.dot {
-	background: #f6f6f6 url('/plugins/MantisKanban/files/priority.png') no-repeat 0 -20px;
+	background: #f6f6f6 url('priority.png') no-repeat 0 -20px;
 	float:left;
 	display: block;
 	height: 9px;
@@ -131,10 +134,11 @@ div.card div.priority60 span.dot6 { background-position: 0 -10px; }
 
 
 div.card div.summary {
-	font: 9px Arial, sans-serif;
+	font: 10px Arial, sans-serif;
 	line-height: 1.5em;
 	overflow: hidden;
 	padding: 9px;
+        font-weight: bold;
 }
 
 
@@ -186,8 +190,61 @@ div.cardEnhancement div.bugTime span.fake { border-left-color: #609; }
 
 
 
+/* SMX styles */
+div.card div.priority span {
+    font: 10px Arial, sans-serif;    
+}
+div.card div.priority span.status_10 {
+    color: red;
+}
+div.card div.priority span.status_20,
+div.card div.priority span.status_30
+{
+    color: blue;
+}
+div.card div.priority span.status_40 {
+    color: #808080;
+}
+div.card div.priority span.status_50 {
+    color: orange;
+}
+div.card div.priority span.status_60,
+div.card div.priority span.status_80,
+div.card div.priority span.status_90
+{
+    color: green;
+}
 
+td.alert {
+    background-color: red;
+}
+td.projectHeader {
+    background-color: #c2dfff;
+    padding: 5px;
+    margin: 5px;
+}
+div.headerProject {
+    font-weight: bold;
+    color: #ABABAB;
+}
+td.totalSum {
+    font-weight: bold;
+    text-align: center;
+}
+td.totalSum div{
+    color: green;
+}
+td.totalSum div.alert{
+    color: red;
+}
+tr.totalNums td {
+    background-color: silver;
+}
 
-
-
+#ajax_statuschange input,
+#ajax_statuschange select
+{
+    font-size: 9px;
+    width: 90px;
+}
 
