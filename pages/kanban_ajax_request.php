@@ -30,6 +30,7 @@ $f_entrypoint = gpc_get_string( 'entrypoint' );
 $t_function = 'kanban_ajax_request_' . $f_entrypoint;
 if ( function_exists( $t_function ) ) {
        log_event( LOG_AJAX, "Calling {$t_function}..." );
+       //ToDo: Make use of the workflow!
        call_user_func( $t_function );
 } else {
        log_event( LOG_AJAX, "Unknown function for entry point = " . $t_function );

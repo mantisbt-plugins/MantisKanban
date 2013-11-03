@@ -62,7 +62,7 @@ if( ON == plugin_config_get( 'kanban_simple_columns' ) )
     {
         if( $num < $hideUntilThisStatus )
         {
-            $wip_limit = 2;
+            $wip_limit = 12;
             //no limit for "new"
             if(10 == $num)
             {
