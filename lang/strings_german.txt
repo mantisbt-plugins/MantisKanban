@@ -22,3 +22,10 @@ $s_header_column_7 = '';
 $s_header_column_8 = '';
 
 $s_confirm_change_status = 'Jetzt Status wechseln?';
+
+$s_plugin_kanban_title = 'Kanban';
+$s_plugin_kanban_config = 'Konfiguration';
+$s_plugin_kanban_columns = 'Spalten-Einstellungen';
+$s_plugin_kanban_simple_columns = 'Jeder Status führt zu einer Spalte';
+$s_plugin_kanban_combined_columns = 'Die Status können gruppiert werden';
+

@@ -52,26 +52,27 @@ $columns = array(
 	lang_get('header_column_5') => array('status' => 50, 'wip_limit' => 8),
 	//lang_get('header_column_6') => array('status' => array(60,80,90), 'wip_limit' => 0),
 );
-/*
-    echo '<pre>';
-    var_dump(MantisEnum::getAssocArrayIndexedByValues( $g_status_enum_string ));
-    echo '</pre>';
 
-//ToDo: Make configurable from the settings
-//ToDo: Ignore finished tickets by default
-$defaults   = MantisEnum::getAssocArrayIndexedByValues( $g_status_enum_string );
-$columns    = null;
-foreach($defaults as $num=>$status)
+if( ON == plugin_config_get( 'kanban_simple_columns' ) )
 {
-    $wip_limit = 2;
-    //no limit for "new"
-    if(10 == $num)
+    $defaults   = MantisEnum::getAssocArrayIndexedByValues( $g_status_enum_string );
+    $columns    = null;
+    $hideUntilThisStatus = config_get('bug_resolved_status_threshold');
+    foreach($defaults as $num=>$status)
     {
-        $wip_limit = 0;
+        if( $num < $hideUntilThisStatus )
+        {
+            $wip_limit = 2;
+            //no limit for "new"
+            if(10 == $num)
+            {
+                $wip_limit = 0;
+            }
+            $columns[kanban_get_status_text($num)] = array('status' => array($num), 'wip_limit' => $wip_limit, 'color' => get_status_color( $num ) );
+        }
     }
-    $columns[kanban_get_status_text($num)] = array('status' => array($num), 'wip_limit' => $wip_limit, 'color' => get_status_color( $num ) );
 }
-*/
+
 // default sorting of the tickets in the columns
 // either 'last_updated' or 'priority'
 $f_default_sort_by = 'priority';//'last_updated';
