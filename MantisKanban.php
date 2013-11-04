@@ -3,18 +3,20 @@
 class MantisKanbanPlugin extends MantisPlugin {
 
     function register() {
-        $this->name = 'Mantis Kanban';    # Proper name of plugin
-        $this->description = 'Advanced Kanban board view';    # Short description of the plugin
-        $this->page = 'config';           # Default plugin page
+        $this->name         = 'Mantis Kanban';
+        $this->description  = 'Advanced Kanban board view';
+        $this->page         = 'config';
 
-        $this->version = '1.1';     # Plugin version string
-        $this->requires = array(# Plugin dependencies, array of basename => version pairs
-            'MantisCore' => '1.2.0', #   Should always depend on an appropriate version of MantisBT
+        $this->version = '1.2';
+        
+        $this->requires = array(
+            'MantisCore'    => '1.2.0',
+            'jQuery'        => '1.6.2',
         );
 
-        $this->author = 'Joanna Chlasta, Stefan Moises';         # Author/team name
-        $this->contact = 'moises@shoptimax.de';        # Author/team e-mail address
-        $this->url = 'https://github.com/smxsm/MantisKanban';            # Support webpage
+        $this->author   = 'Joanna Chlasta, Stefan Moises, Joscha Krug';
+        $this->contact  = 'moises@shoptimax.de';
+        $this->url      = 'https://github.com/smxsm/MantisKanban';
     }
 
     function init() {
@@ -38,13 +40,25 @@ class MantisKanbanPlugin extends MantisPlugin {
 
     function hooks() {
         $hooks = array(
-            'EVENT_MENU_MAIN' => 'main_menu'
+            'EVENT_MENU_MAIN'           => 'main_menu',
+            'EVENT_LAYOUT_RESOURCES'    => 'resources',
         );
         return $hooks;
     }
-
+    /**
+     * Adds a new link to the main menu to enter the kanban board
+     * @return array new link for the main menu
+     */
     function main_menu() {
         return array('<a href="' . plugin_page('kanban_page') . '">' . plugin_lang_get('main_menu_kanban') . '</a>',);
+    }
+    
+    /**
+     * Create the resource link to load the jQuery library.
+     */
+    function resources( $p_event ) {
+            return '<script type="text/javascript" src="' . plugin_file( 'kanban.js' ) . '"></script>'.
+                   '<script type="text/javascript">var kanbanAjaxUrl = "' . plugin_page('kanban_ajax_request') . '";</script>';
     }
 
 }

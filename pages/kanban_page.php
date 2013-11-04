@@ -52,6 +52,27 @@ $columns = array(
 	lang_get('header_column_5') => array('status' => 50, 'wip_limit' => 8),
 	//lang_get('header_column_6') => array('status' => array(60,80,90), 'wip_limit' => 0),
 );
+
+if( ON == plugin_config_get( 'kanban_simple_columns' ) )
+{
+    $defaults   = MantisEnum::getAssocArrayIndexedByValues( $g_status_enum_string );
+    $columns    = null;
+    $hideUntilThisStatus = config_get('bug_resolved_status_threshold');
+    foreach($defaults as $num=>$status)
+    {
+        if( $num < $hideUntilThisStatus )
+        {
+            $wip_limit = 12;
+            //no limit for "new"
+            if(10 == $num)
+            {
+                $wip_limit = 0;
+            }
+            $columns[kanban_get_status_text($num)] = array('status' => array($num), 'wip_limit' => $wip_limit, 'color' => get_status_color( $num ) );
+        }
+    }
+}
+
 // default sorting of the tickets in the columns
 // either 'last_updated' or 'priority'
 $f_default_sort_by = 'priority';//'last_updated';
@@ -160,14 +181,14 @@ foreach($all_project_ids as $curr_project_id) {
             $filter_array, $curr_project_id
         );
         if(!count($rows)) {
-            ?><td valign="top">
+            ?><td valign="top" id="<?php echo $column['status'][0];?>" class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>" style="background-color:<?php echo $column['color'];?>">
                 <h2><?php echo $title;?></h2>                
             </td><?php 
             continue;
         }
         $rowcounts[$title] += count($rows);
         
-        ?><td valign="top" class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alert';}?>"><?php 
+        ?><td valign="top" id="<?php echo $column['status'][0];?>" class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alert';}?> kanbanColumn kanbanColumn<?php echo $column['status'][0];?>" style="background-color:<?php echo $column['color'];?>"><?php 
 	
         echo '<h2>'. $title .' ('. $t_bug_count .')';
         if($column['wip_limit'] > 0) {
@@ -179,44 +200,18 @@ foreach($all_project_ids as $curr_project_id) {
 		$i = 0;
 		foreach($rows as $row){
 			$t_bug = $row;
-			echo '<div class="card'. ($i%2==1 ? ' cardOdd' : '') . ' card'. category_full_name( $t_bug->category_id, false ) .'">';
-			
-			// print username instead of status
-			if(( ON == config_get( 'show_assigned_names' ) ) && ( $t_bug->handler_id > 0 ) && user_exists($t_bug->handler_id) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $t_bug->project_id ) ) ) {
-				$emailHash = md5( strtolower( trim( user_get_email($t_bug->handler_id) ) ) );
-				echo '<div class="owner">';
-				echo '<img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=mm" />'; 
-			
-				echo prepare_user_name( $t_bug->handler_id );
-				echo '</div>';
-			}
-			
-			echo '<div class="header">';
-                        echo '<div class="headerProject">' . project_get_name( $t_bug->project_id ) . '</div>';
-			echo '	<div class="bugLink">#'. string_get_bug_view_link( $t_bug->id ) .'</div>';
+			echo '<div data-userid="' . $t_current_user_id . '"  data-ticketid="' . $t_bug->id . '" data-projectid="' . $t_bug->project_id . '" class="card '. ($i%2==1 ? 'cardOdd' : 'cardEven') . ' card'. category_full_name( $t_bug->category_id, false ) .'">';
+			echo icon_get_status_icon($t_bug->priority);
+			echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink">' . string_display_line_links( $t_bug->summary ) . '</a>';
+			echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink right"> #'. $t_bug->id .'</a>';
 			
 			$priority = get_enum_element( 'priority', $t_bug->priority );
-                        
-                        // get additional bug description to show via mouseover and onclick
-                        $bug_desc = htmlentities(utf8_decode(nl2br(bug_get_text_field($t_bug->id, 'description'))), ENT_QUOTES|ENT_SUBSTITUTE);
-			$bug_desc_alert = str_replace("&lt;br /&gt;","\\n", $bug_desc);
-			$bug_desc_title = str_replace("&lt;br /&gt;","", $bug_desc);
-                        
-			echo '	<div class="priority priority'. $t_bug->priority .'" title="'. $priority .'">';
-			for($j=0; $j<60; $j+=10){
-				echo '<span class="dot dot'. ($j/10+1) .'">'. ($j<$t_bug->priority ? '*' : '&nbsp;') .'</span>';
-			}
-			echo '<br><span class="status_'.$t_bug->status.'">'.string_display_line( get_enum_element( 'status', $t_bug->status ) ).'</span><br><br></div>';
-			echo '</div>';
-                        
-			echo '<div class="summary" style="clear:left;" title="'.$bug_desc_title.'">'. string_display_line_links( $t_bug->summary ) .' <a href="javascript:alert(\''.$bug_desc_alert.'\')"><img src="images/plus.png" alt="'.$bug_desc_title.'" title="'.$bug_desc_title.'" border="0"/></a></div>';
-			
-			$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
-			
-			echo '<div class="bugTime"><span class="fake"></span>'. $t_last_updated .'</div>';
-			
+			/*
 			echo '<div class="info">';
-			
+                        echo '<img src="images/plus.png" alt="'.$bug_desc_title.'" title="'.$bug_desc_title.'" border="0"/>';
+                        echo bug_get_text_field($t_bug->id, 'description');
+                        echo string_display_line_links( $t_bug->summary );
+			echo project_get_name( $t_bug->project_id );
 			if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
 				echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="plugins/MantisKanban/files/pencil.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
                                 echo '<br>' . kanban_ajax_button_bug_change_status( $t_bug->id, $t_bug->project_id, $t_current_user_id );
@@ -240,6 +235,22 @@ foreach($all_project_ids as $curr_project_id) {
 			}
 			
 			echo '</div>';
+                        */
+			$t_submitted = date( config_get( 'normal_date_format' ), $t_bug->date_submitted );
+			echo '<div class="bugTime">'. $t_submitted . '<br>';
+			$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
+			echo $t_last_updated .'</div>';
+                        
+                        
+                        // print username instead of status
+			if(( ON == config_get( 'show_assigned_names' ) ) && ( $t_bug->handler_id > 0 ) && user_exists($t_bug->handler_id) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $t_bug->project_id ) ) ) {
+				$emailHash = md5( strtolower( trim( user_get_email($t_bug->handler_id) ) ) );
+				echo '<div class="owner">';
+				echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=mm" width="28" height="28" /></div>'; 
+			
+				echo user_get_realname( $t_bug->handler_id );
+				echo '</div>';
+			}
 			echo '</div>';
 			
 			$i++;
