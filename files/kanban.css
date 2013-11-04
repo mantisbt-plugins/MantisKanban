@@ -6,15 +6,16 @@ table.kanbanTable tr {
 }
 table.kanbanTable tr td {
 	width: 250px;
-        padding-left: 10px;
+    padding: 0 10px 0 0;
+    border-left:solid 2px white;
 }
 
 
 #kanbanPage h1 {
 	font: bold 23px Arial, serif;
 	line-height: 27px;
-	margin: 0 0 27px 0;
 	text-align: center;
+    margin: 0;
 }
 
 #kanbanPage h2 {
@@ -34,11 +35,11 @@ div.card {
 	clear:left;
 	float:left;
 	font: 10px Tahoma, Arial, sans-serif;
-	margin: 0 5% 9px 0;
+	margin: 0 5% 9px 5px;
 	padding: 0;
 	line-height: 13px;
 	width: 95%;
-        box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
 }
 
 div.card a {
@@ -67,11 +68,6 @@ div.card div.owner .img-wrap {
         width:28px;
         height:28px;
         background:#ccc;
-}
-
-div.cardOdd {
-	clear: none;
-	margin: 0 0 9px 0;
 }
 
 div.card a.bugLink {
@@ -152,7 +148,7 @@ td.alert {
     background-color: red;
 }
 td.projectHeader {
-    background-color: #c2dfff;
+    background-color: #ddd;
     padding: 5px;
     margin: 5px;
 }
