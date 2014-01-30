@@ -5,7 +5,7 @@ table.kanbanTable tr {
 	vertical-align: top;
 }
 table.kanbanTable tr td {
-	width: 250px;
+	width: 25%;
     padding: 0 10px 0 0;
     border-left:solid 2px white;
 }
@@ -13,9 +13,9 @@ table.kanbanTable tr td {
 
 #kanbanPage h1 {
 	font: bold 23px Arial, serif;
-	line-height: 27px;
-	text-align: center;
-    margin: 0;
+	/*line-height: 27px;
+	text-align: center;*/
+    margin: 12px;
 }
 
 #kanbanPage h2 {
@@ -148,7 +148,7 @@ td.alert {
     background-color: red;
 }
 td.projectHeader {
-    background-color: #ddd;
+    /*background-color: #ddd;*/
     padding: 5px;
     margin: 5px;
 }
