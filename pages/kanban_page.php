@@ -45,10 +45,12 @@ require_once( 'kanban_api.php' );
  * shows all tickets with status = 10 and has a "work in progress" limit of 0 (unlimited).
 */
 $columns = array(
-	"Réception" => array('status' => array(10), 'wip_limit' => 0, 'color' => '#ccc'),
-	"Qualification" => array('status' => array(20, 40), 'wip_limit' => 0, 'color' => '#ccc'),
-	"Travail en cours" => array('status' => array(50, 30), 'wip_limit' => 0, 'color' => '#ccc'),
-	"Livraison" => array('status' => array(80), 'wip_limit' => 0, 'color' => '#ccc'),
+	lang_get('header_column_1') => array('status' => array(10), 'wip_limit' => 0),
+	lang_get('header_column_2') => array('status' => array(30), 'wip_limit' => 0),
+	lang_get('header_column_3') => array('status' => array(40), 'wip_limit' => 8),
+	lang_get('header_column_4') => array('status' => 20, 'wip_limit' => 0),
+	lang_get('header_column_5') => array('status' => 50, 'wip_limit' => 8),
+	//lang_get('header_column_6') => array('status' => array(60,80,90), 'wip_limit' => 0),
 );
 
 if( ON == plugin_config_get( 'kanban_simple_columns' ) )
@@ -73,7 +75,7 @@ if( ON == plugin_config_get( 'kanban_simple_columns' ) )
 
 // default sorting of the tickets in the columns
 // either 'last_updated' or 'priority'
-$f_default_sort_by = 'priority';
+$f_default_sort_by = 'priority';//'last_updated';
 
 // current sorting
 $f_sort_by = gpc_get_string( 'sort', $f_default_sort_by );
@@ -105,23 +107,20 @@ $t_icon_path = config_get( 'icon_path' );
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo helper_mantis_url( 'plugins/MantisKanban/files/kanban.css' ); ?>"/>
 <div id="kanbanPage">
-<?php
-// if viewing all projects, allow to switch between combined and splitted view
-// (all projects mixed together or separated into rows)
-$f_default_pdisplay = "splitted";
-$pdisplay = gpc_get_string( 'pdisplay', $f_default_pdisplay );
-?>
-<table class="hide kanbanTable" border="0" cellspacing="0" cellpadding="0" style="width: 100%<?php //echo (count($columns)*250); ?>px">
+
+<table class="hide kanbanTable" border="0" cellspacing="0" cellpadding="0" style="width: <?php echo (count($columns)*250); ?>px">
     <tr>
-        <td colspan="<?php echo count($columns);?>">
+        <td colspan="<?php echo count($columns)-2;?>">
             <?php echo lang_get( 'sort' ); ?>
-            <a href="plugin.php?page=MantisKanban/kanban_page&sort=last_updated&pdisplay=<?php echo $pdisplay; ?>" <?php if($f_sort_by == 'last_updated') {?> class="bold"<?php }?>>
-                activit&eacute;</a> |
-            <a href="plugin.php?page=MantisKanban/kanban_page&sort=priority&pdisplay=<?php echo $pdisplay; ?>" <?php if($f_sort_by == 'priority') {?> class="bold"<?php }?>>priorit&eacute;</a>
+            <a href="plugin.php?page=MantisKanban/kanban_page&sort=last_updated" <?php if($f_sort_by == 'last_updated') {?> class="bold"<?php }?>>
+                <?php echo lang_get( 'sort_date_modified' );?></a> |
+            <a href="plugin.php?page=MantisKanban/kanban_page&sort=priority" <?php if($f_sort_by == 'priority') {?> class="bold"<?php }?>><?php echo lang_get( 'sort_priority_link' );?></a>
+        </td>
+        <td colspan="2" align="right">
             <?php if( helper_get_current_project() == 0 ) { ?>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Projets
-                <a href="plugin.php?page=MantisKanban/kanban_page&sort=<?php echo $f_sort_by; ?>&pdisplay=combined" <?php if($pdisplay == 'combined') {?> class="bold"<?php }?>>combin&eacute;s</a> |
-                <a href="plugin.php?page=MantisKanban/kanban_page&sort=<?php echo $f_sort_by; ?>&pdisplay=splitted" <?php if($pdisplay == 'splitted') {?> class="bold"<?php }?>>&eacute;clat&eacute;s</a>            
+                <?php echo lang_get( 'projectdisplay' ); ?>
+                <a href="plugin.php?page=MantisKanban/kanban_page&pdisplay=combined"><?php echo lang_get( 'project_nogroups' );?></a> |
+                <a href="plugin.php?page=MantisKanban/kanban_page&pdisplay=splitted"><?php echo lang_get( 'project_groups' );?></a>            
             <?php } ?>
         </td>
     </tr>
@@ -141,6 +140,10 @@ if( helper_get_current_project() == 0 ) {
 // get all user set filters
 $t_filter = current_user_get_bug_filter();
 
+// if viewing all projects, allow to switch between combined and splitted view
+// (all projects mixed together or separated into rows)
+$f_default_pdisplay = "combined";
+$pdisplay = gpc_get_string( 'pdisplay', $f_default_pdisplay );
 // only one project to display?
 if($t_project_id || $pdisplay == "combined") {
     $all_project_ids = array($t_project_id);
@@ -151,15 +154,6 @@ else {
 $rowcounts = array();
 
 foreach($all_project_ids as $curr_project_id) {
-$t_per_page = -1;
-$filter_array = array(
-    // general filters set by user, add more if needed
-    'show_category' => $t_filter['show_category'],
-    'show_priority' => $t_filter['show_priority'],
-    'handler_id' => $t_filter['handler_id']
-);
-if (count(filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $filter_array, $curr_project_id )) < 1) continue;
-
 ?>
     <tr>
         <td class="projectHeader" colspan="<?php echo count($columns);?>">
@@ -179,12 +173,16 @@ if (count(filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bu
             $t_per_page = -1;
         }
         // set custom filters, partially using the global filters defined by user
-        $filter_array = array_merge($filter_array, array(
+        $filter_array = array(
             'show_status' => $column['status'],
             'sort' => $f_sort_by,
             'dir' => 'DESC',
-            '_view_type' => 'advanced'
-        ));
+            '_view_type' => 'advanced',
+            // general filters set by user, add more if needed
+            'show_category' => $t_filter['show_category'],
+            'show_priority' => $t_filter['show_priority'],
+            'handler_id' => $t_filter['handler_id'],
+        );
 	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, 
             $filter_array, $curr_project_id
         );
@@ -210,19 +208,19 @@ if (count(filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bu
             if($i < 150)
             {
                 $t_bug = $row;
-                echo '<div style="background-color:' . get_status_color($t_bug->status) . '" data-userid="' . $t_current_user_id . '"  data-ticketid="' . $t_bug->id . '" data-projectid="' . $t_bug->project_id . '" class="card '. ($i%2==1 ? 'cardOdd' : 'cardEven') . ' card'. category_full_name( $t_bug->category_id, false ) .'">';
-		echo icon_get_status_icon($t_bug->priority);
+                echo '<div data-userid="' . $t_current_user_id . '"  data-ticketid="' . $t_bug->id . '" data-projectid="' . $t_bug->project_id . '" class="card '. ($i%2==1 ? 'cardOdd' : 'cardEven') . ' card'. category_full_name( $t_bug->category_id, false ) .'">';
+                echo icon_get_status_icon($t_bug->priority);
                 echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink">' . string_display_line_links( $t_bug->summary ) . '</a>';
                 echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink right"> #'. $t_bug->id .'</a>';
                 
                 $priority = get_enum_element( 'priority', $t_bug->priority );
-                
+                /*
                 echo '<div class="info">';
-                /*            echo '<img src="images/plus.png" alt="'.$bug_desc_title.'" title="'.$bug_desc_title.'" border="0"/>';
+                            echo '<img src="images/plus.png" alt="'.$bug_desc_title.'" title="'.$bug_desc_title.'" border="0"/>';
                             echo bug_get_text_field($t_bug->id, 'description');
-                            echo string_display_line_links( $t_bug->summary );*/
-                echo project_get_name( $t_bug->project_id ) . '<br />' . category_full_name( $t_bug->category_id, false ) . '<br />';
-                /*if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
+                            echo string_display_line_links( $t_bug->summary );
+                echo project_get_name( $t_bug->project_id );
+                if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
                     echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="plugins/MantisKanban/files/pencil.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
                                     echo '<br>' . kanban_ajax_button_bug_change_status( $t_bug->id, $t_bug->project_id, $t_current_user_id );
                 }
@@ -242,25 +240,25 @@ if (count(filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bu
                 }
                 if( VS_PRIVATE == $t_bug->view_state ) {
                     echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
-                }*/
+                }
                 
                 echo '</div>';
-                           
-                /*$t_submitted = date( config_get( 'normal_date_format' ), $t_bug->date_submitted );
-                echo '<div class="bugTime">'. $t_submitted . '<br>';*/
+                            */
+                $t_submitted = date( config_get( 'normal_date_format' ), $t_bug->date_submitted );
+                echo '<div class="bugTime">'. $t_submitted . '<br>';
                 $t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
                 echo $t_last_updated .'</div>';
                             
                             
                             // print username instead of status
-                /*if(( ON == config_get( 'show_assigned_names' ) ) && ( $t_bug->handler_id > 0 ) && user_exists($t_bug->handler_id) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $t_bug->project_id ) ) ) {
+                if(( ON == config_get( 'show_assigned_names' ) ) && ( $t_bug->handler_id > 0 ) && user_exists($t_bug->handler_id) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $t_bug->project_id ) ) ) {
                     $emailHash = md5( strtolower( trim( user_get_email($t_bug->handler_id) ) ) );
                     echo '<div class="owner">';
                     echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=monsterid" width="28" height="28" /></div>'; 
                 
                     echo user_get_realname( $t_bug->handler_id );
                     echo '</div>';
-                }*/
+                }
                 echo '</div>';
                 
                 $i++;
@@ -279,7 +277,7 @@ if (count(filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bu
 }
 ?>
 </tr>
-<?php /*<tr class="totalNums">
+<tr class="totalNums">
     <?php
     foreach($columns as $title => $column){
     ?>
@@ -297,10 +295,9 @@ if (count(filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bu
     <?php
     } 
     ?>
-</tr>*/ ?>
+</tr>
 </table>
 </div>
 
 <?php
-html_status_legend();
-html_page_bottom();
+	html_page_bottom();
