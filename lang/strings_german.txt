@@ -3,7 +3,7 @@
 $s_plugin_MantisKanban_main_menu_kanban = "Kanban";
 $s_plugin_MantisKanban_kanban_link = "Kanban Board Ansicht";
 
-$s_view_attachments_for_issue = 'Attachment anzeigen';
+$s_view_attachments_for_issue = 'Anhänge anzeigen';
 
 $s_projectdisplay = 'Projekte';
 $s_project_nogroups = 'nicht gruppieren';
