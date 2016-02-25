@@ -186,13 +186,13 @@ foreach($all_project_ids as $curr_project_id) {
 	    $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count,
             $filter_array, $curr_project_id
         );
-        if(!count($rows)) {
+        $rowcounts[$title] = count($rows);
+        if(!$rows) {
             ?><td valign="top" style="border-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
                 <h2 style="background-color:<?php echo $column['color'];?>"><?php echo $title;?></h2>
             </td><?php
             continue;
         }
-        $rowcounts[$title] += count($rows);
 
         ?><td valign="top" style="border-left-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alertOff';}?> kanbanColumn kanbanColumn<?php echo $column['status'][0];?>"><?php
 
