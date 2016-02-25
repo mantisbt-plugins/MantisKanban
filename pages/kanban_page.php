@@ -188,20 +188,27 @@ foreach($all_project_ids as $curr_project_id) {
         );
         $rowcounts[$title] = count($rows);
         if(!$rows) {
-            ?><td valign="top" style="border-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
-                <h2 style="background-color:<?php echo $column['color'];?>"><?php echo $title;?></h2>
+            ?><td valign="top"
+                <?php if( isset( $column['color'] ) ) { ?>style="border-color:<?php echo $column['color'];?>"<?php } ?>
+                id="<?php echo $column['status'][0];?>"
+                class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
+                <h2 <?php if( isset( $column['color'] ) ) { ?>style="background-color:<?php echo $column['color'];?>"<?php } ?>><?php echo $title;?></h2>
             </td><?php
             continue;
         }
 
-        ?><td valign="top" style="border-left-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alertOff';}?> kanbanColumn kanbanColumn<?php echo $column['status'][0];?>"><?php
+        ?><td valign="top"
+            <?php if( isset( $column['color'] ) ) { ?>style="border-left-color:<?php echo $column['color'];?>"<?php } ?>
+            id="<?php echo $column['status'][0];?>"
+            class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alertOff';}?> kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
 
-        echo '<h2 style="background-color:' . $column['color'] . '">'. $title .' ('. $t_bug_count .')';
+        <h2 <?php if( isset( $column['color'] ) ) { ?>style="background-color:<?php echo $column['color'];?>"<?php } ?>><?php
+        echo $title . ' (' . $t_bug_count .')';
         if($column['wip_limit'] > 0) {
             echo " Limit: " . $column['wip_limit'];
-        }
-        echo ' </h2>';
-
+        } ?>
+        </h2>
+<?php
 	if(!empty($rows)){
 		$i = 0;
 		foreach($rows as $row){
