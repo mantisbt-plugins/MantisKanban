@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- * 
+ *
  * Kanban plugin forked by Stefan Moises / shoptimax - moises@shoptimax.de
  */
 
@@ -120,7 +120,7 @@ $t_icon_path = config_get( 'icon_path' );
             <?php if( helper_get_current_project() == 0 ) { ?>
                 <?php echo lang_get( 'projectdisplay' ); ?>
                 <a href="plugin.php?page=MantisKanban/kanban_page&pdisplay=combined"><?php echo lang_get( 'project_nogroups' );?></a> |
-                <a href="plugin.php?page=MantisKanban/kanban_page&pdisplay=splitted"><?php echo lang_get( 'project_groups' );?></a>            
+                <a href="plugin.php?page=MantisKanban/kanban_page&pdisplay=splitted"><?php echo lang_get( 'project_groups' );?></a>
             <?php } ?>
         </td>
     </tr>
@@ -161,8 +161,8 @@ foreach($all_project_ids as $curr_project_id) {
         </td>
     </tr>
     <tr>
-<?php    
-    
+<?php
+
     foreach($columns as $title => $column){
         if($column['status'][0] > 79)
         {
@@ -183,25 +183,25 @@ foreach($all_project_ids as $curr_project_id) {
             'show_priority' => $t_filter['show_priority'],
             'handler_id' => $t_filter['handler_id'],
         );
-	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, 
+	    $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count,
             $filter_array, $curr_project_id
         );
         if(!count($rows)) {
             ?><td valign="top" style="border-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
-                <h2 style="background-color:<?php echo $column['color'];?>"><?php echo $title;?></h2>                
-            </td><?php 
+                <h2 style="background-color:<?php echo $column['color'];?>"><?php echo $title;?></h2>
+            </td><?php
             continue;
         }
         $rowcounts[$title] += count($rows);
-        
-        ?><td valign="top" style="border-left-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alertOff';}?> kanbanColumn kanbanColumn<?php echo $column['status'][0];?>"><?php 
-	
+
+        ?><td valign="top" style="border-left-color:<?php echo $column['color'];?>" id="<?php echo $column['status'][0];?>" class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']){ echo 'alertOff';}?> kanbanColumn kanbanColumn<?php echo $column['status'][0];?>"><?php
+
         echo '<h2 style="background-color:' . $column['color'] . '">'. $title .' ('. $t_bug_count .')';
         if($column['wip_limit'] > 0) {
             echo " Limit: " . $column['wip_limit'];
         }
         echo ' </h2>';
-	
+
 	if(!empty($rows)){
 		$i = 0;
 		foreach($rows as $row){
@@ -212,7 +212,7 @@ foreach($all_project_ids as $curr_project_id) {
                 echo icon_get_status_icon($t_bug->priority);
                 echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink">' . string_display_line_links( $t_bug->summary ) . '</a>';
                 echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink right"> #'. $t_bug->id .'</a>';
-                
+
                 $priority = get_enum_element( 'priority', $t_bug->priority );
                 /*
                 echo '<div class="info">';
@@ -224,48 +224,48 @@ foreach($all_project_ids as $curr_project_id) {
                     echo '<a href="' . string_get_bug_update_url( $t_bug->id ) . '"><img border="0" src="plugins/MantisKanban/files/pencil.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
                                     echo '<br>' . kanban_ajax_button_bug_change_status( $t_bug->id, $t_bug->project_id, $t_current_user_id );
                 }
-                
+
                 // Check for attachments
                 $t_attachment_count = 0;
                 if(( file_can_view_bug_attachments( $t_bug->id ) ) ) {
                     $t_attachment_count = file_bug_attachment_count( $t_bug->id );
                 }
-                
+
                 if( 0 < $t_attachment_count ) {
                     $t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
                     $t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
                     $t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
                     echo "<a class=\"attachments\" href=\"$t_href\" title=\"$t_href_title\"><img src=\"plugins/MantisKanban/files/paper-clip.png\" alt=\"$t_alt_text\" title=\"$t_alt_text\" /></a>";
-                    
+
                 }
                 if( VS_PRIVATE == $t_bug->view_state ) {
                     echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
                 }
-                
+
                 echo '</div>';
                             */
                 $t_submitted = date( config_get( 'normal_date_format' ), $t_bug->date_submitted );
                 echo '<div class="bugTime">'. $t_submitted . '<br>';
                 $t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
                 echo $t_last_updated .'</div>';
-                            
-                            
+
+
                             // print username instead of status
                 if(( ON == config_get( 'show_assigned_names' ) ) && ( $t_bug->handler_id > 0 ) && user_exists($t_bug->handler_id) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $t_bug->project_id ) ) ) {
                     $emailHash = md5( strtolower( trim( user_get_email($t_bug->handler_id) ) ) );
                     echo '<div class="owner">';
-                    echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=monsterid" width="28" height="28" /></div>'; 
-                
+                    echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=monsterid" width="28" height="28" /></div>';
+
                     echo user_get_realname( $t_bug->handler_id );
                     echo '</div>';
                 }
                 echo '</div>';
-                
+
                 $i++;
             }
         }
 	}
-	
+
 	?></td><?php
     }
 
@@ -273,7 +273,7 @@ foreach($all_project_ids as $curr_project_id) {
         </td>
     </tr>
     <tr>
-<?php    
+<?php
 }
 ?>
 </tr>
@@ -284,8 +284,8 @@ foreach($all_project_ids as $curr_project_id) {
     <td align="center" class="totalSum">
         <h2><?php echo $title; ?></h2>
         <div class="<?php if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']) {echo 'alert';}?>">
-        <?php 
-        echo $rowcounts[$title]; 
+        <?php
+        echo $rowcounts[$title];
         if($column['wip_limit'] > 0 && $rowcounts[$title] > $column['wip_limit']) {
             echo " (Limit: " . $column['wip_limit'] . ")";
         }
@@ -293,7 +293,7 @@ foreach($all_project_ids as $curr_project_id) {
         </div>
     </td>
     <?php
-    } 
+    }
     ?>
 </tr>
 </table>
