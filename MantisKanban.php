@@ -25,11 +25,11 @@ class MantisKanbanPlugin extends MantisPlugin {
         $t_path = config_get_global('plugin_path') . plugin_get_current() . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR;
 
         set_include_path(get_include_path() . PATH_SEPARATOR . $t_path);
-        
+
         // register our custom tables
 	#$GLOBALS['g_db_table']['mantis_team_user_table']    = '%db_table_prefix%_team_user%db_table_suffix%';
 	#$GLOBALS['g_db_table']['mantis_team_table']         = '%db_table_prefix%_team%db_table_suffix%';
-        
+
     }
 
     public static function autoload($className) {
@@ -45,6 +45,7 @@ class MantisKanbanPlugin extends MantisPlugin {
         );
         return $hooks;
     }
+
     /**
      * Adds a new link to the main menu to enter the kanban board
      * @return array new link for the main menu
@@ -52,7 +53,7 @@ class MantisKanbanPlugin extends MantisPlugin {
     function main_menu() {
         return array('<a href="' . plugin_page('kanban_page') . '">' . plugin_lang_get('main_menu_kanban') . '</a>',);
     }
-    
+
     /**
      * Create the resource link to load the jQuery library.
      */
