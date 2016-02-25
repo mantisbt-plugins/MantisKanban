@@ -38,6 +38,12 @@ class MantisKanbanPlugin extends MantisPlugin {
         }
     }
 
+    function config() {
+        return array(
+            'kanban_simple_columns' => ON,
+        );
+    }
+
     function hooks() {
         $hooks = array(
             'EVENT_MENU_MAIN'           => 'main_menu',
