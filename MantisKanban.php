@@ -16,7 +16,7 @@ class MantisKanbanPlugin extends MantisPlugin {
 
         $this->author   = 'Joanna Chlasta, Stefan Moises, Joscha Krug';
         $this->contact  = 'moises@shoptimax.de';
-        $this->url      = 'https://github.com/smxsm/MantisKanban';
+        $this->url      = 'https://github.com/mantisbt-plugins/MantisKanban';
     }
 
     function init() {
