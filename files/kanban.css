@@ -81,6 +81,17 @@ div.card a.bugLink.right {
         margin-right:5px;
 }
 
+div.card a.bugLinkRecent {
+	font: bold 16px Tahoma, sans-serif;
+	line-height: 20px;
+        color: black;
+}
+
+div.card a.bugLinkRecent.right {
+	float:right;
+        margin-right:5px;
+}
+
 div.card div.summary {
 	font: 10px Arial, sans-serif;
 	line-height: 1.5em;

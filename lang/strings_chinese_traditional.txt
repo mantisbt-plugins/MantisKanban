@@ -1,0 +1,31 @@
+<?php
+
+$s_plugin_MantisKanban_main_menu_kanban = "看板";
+$s_plugin_MantisKanban_kanban_link = "看板";
+
+$s_view_attachments_for_issue = '檢視附件';
+
+$s_projectdisplay = '專案顯示';
+$s_project_nogroups = '合併';
+$s_project_groups = '獨立';
+
+$s_sort_date_modified = '更新日期';
+$s_sort_priority_link = '優先序';
+
+$s_header_column_1 = 'Not assigned';
+$s_header_column_2 = 'On hold';
+$s_header_column_3 = 'WIP';
+$s_header_column_4 = 'Feedback';
+$s_header_column_5 = 'Test';
+$s_header_column_6 = 'Done';
+$s_header_column_7 = '';
+$s_header_column_8 = '';
+
+$s_confirm_change_status = '確定要更新狀態?';
+
+$s_plugin_kanban_title = '看板';
+$s_plugin_kanban_config = '設定';
+$s_plugin_kanban_columns = '欄位設定';
+$s_plugin_kanban_simple_columns = '各狀態使用獨立欄位';
+$s_plugin_kanban_combined_columns = '使用整合欄位';
+
