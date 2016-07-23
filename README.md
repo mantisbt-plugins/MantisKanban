@@ -20,6 +20,11 @@ __Setup__
 
 Changelog
 ---------
+__New features in version 1.2.1.:__
+*   Show only used status in the workflow for each project.
+*   Bold the summary for issue modified with 24 hours.
+*   Show project name in each card for combined view for "All projects".
+
 __New features in version 1.2.:__
 *   make use of the default states
 *   filter directly in the kanban view
