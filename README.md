@@ -24,6 +24,7 @@ __New features in version 1.2.1.:__
 *   Show only used status in the workflow for each project.
 *   Bold the summary for issue modified with 24 hours.
 *   Show project name in each card for combined view for "All projects".
+*	Using the default gravtar setting in config_inc.php.
 
 __New features in version 1.2.:__
 *   make use of the default states
