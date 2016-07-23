@@ -76,10 +76,12 @@ if( ON == plugin_config_get( 'kanban_simple_columns' ) )
 			if ( helper_get_current_project() <> 0 )
 			{	
 				$t_workflow = config_get( 'status_enum_workflow', null, null, $curr_project_id );
-				
-				if ( !isset( $t_workflow[$num] ) )
+				if ( !empty($t_workflow) )
 				{
-					unset( $columns[kanban_get_status_text($num)] );
+					if ( !isset( $t_workflow[$num] ) )
+					{
+						unset( $columns[kanban_get_status_text($num)] );
+					}
 				}
 			}
 			
@@ -204,15 +206,13 @@ foreach($all_project_ids as $curr_project_id) {
         if(!$rows) {
 			# read through the list and show only used status for the selected project
 			$t_workflow = config_get( 'status_enum_workflow', null, null, $curr_project_id );
-			if( !empty( $t_workflow ) ) {
-				if( isset( $t_workflow[$column['status'][0]] ) || 0 == $curr_project_id ) {
-					?><td valign="top"
-						<?php if( isset( $column['color'] ) ) { ?>style="border-color:<?php echo $column['color'];?>"<?php } ?>
-						id="<?php echo $column['status'][0];?>"
-						class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
-						<h2 <?php if( isset( $column['color'] ) ) { ?>style="background-color:<?php echo $column['color'];?>"<?php } ?>><?php echo $title;?></h2>
-					</td><?php
-				}
+			if( empty( $t_workflow ) || isset( $t_workflow[$column['status'][0]] ) || 0 == $curr_project_id ) {
+				?><td valign="top"
+					<?php if( isset( $column['color'] ) ) { ?>style="border-color:<?php echo $column['color'];?>"<?php } ?>
+					id="<?php echo $column['status'][0];?>"
+					class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
+					<h2 <?php if( isset( $column['color'] ) ) { ?>style="background-color:<?php echo $column['color'];?>"<?php } ?>><?php echo $title;?></h2>
+				</td><?php
 			}
             continue;
         }
