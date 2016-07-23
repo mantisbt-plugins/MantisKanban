@@ -21,6 +21,7 @@ require_once( 'bug_api.php' );
 require_once( 'string_api.php' );
 require_once( 'date_api.php' );
 require_once( 'icon_api.php' );
+require_once( 'html_api.php' );
 /**
  * Plugin includes
  */
@@ -69,6 +70,19 @@ if( ON == plugin_config_get( 'kanban_simple_columns' ) )
                 $wip_limit = 0;
             }
             $columns[kanban_get_status_text($num)] = array('status' => array($num), 'wip_limit' => $wip_limit, 'color' => get_status_color( $num ) );
+			
+			
+			//show only status in the workflow for current project
+			if ( helper_get_current_project() <> 0 )
+			{	
+				$t_workflow = config_get( 'status_enum_workflow', null, null, $curr_project_id );
+				
+				if ( !isset( $t_workflow[$num] ) )
+				{
+					unset( $columns[kanban_get_status_text($num)] );
+				}
+			}
+			
         }
     }
 }
@@ -188,12 +202,18 @@ foreach($all_project_ids as $curr_project_id) {
         );
         $rowcounts[$title] = count($rows);
         if(!$rows) {
-            ?><td valign="top"
-                <?php if( isset( $column['color'] ) ) { ?>style="border-color:<?php echo $column['color'];?>"<?php } ?>
-                id="<?php echo $column['status'][0];?>"
-                class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
-                <h2 <?php if( isset( $column['color'] ) ) { ?>style="background-color:<?php echo $column['color'];?>"<?php } ?>><?php echo $title;?></h2>
-            </td><?php
+			# read through the list and show only used status for the selected project
+			$t_workflow = config_get( 'status_enum_workflow', null, null, $curr_project_id );
+			if( !empty( $t_workflow ) ) {
+				if( isset( $t_workflow[$column['status'][0]] ) || 0 == $curr_project_id ) {
+					?><td valign="top"
+						<?php if( isset( $column['color'] ) ) { ?>style="border-color:<?php echo $column['color'];?>"<?php } ?>
+						id="<?php echo $column['status'][0];?>"
+						class="kanbanColumn kanbanColumn<?php echo $column['status'][0];?>">
+						<h2 <?php if( isset( $column['color'] ) ) { ?>style="background-color:<?php echo $column['color'];?>"<?php } ?>><?php echo $title;?></h2>
+					</td><?php
+				}
+			}
             continue;
         }
 
@@ -216,9 +236,18 @@ foreach($all_project_ids as $curr_project_id) {
             {
                 $t_bug = $row;
                 echo '<div data-userid="' . $t_current_user_id . '"  data-ticketid="' . $t_bug->id . '" data-projectid="' . $t_bug->project_id . '" class="card '. ($i%2==1 ? 'cardOdd' : 'cardEven') . ' card'. category_full_name( $t_bug->category_id, false ) .'">';
+				if ( 'combined' == $pdisplay && 0 == $curr_project_id )
+				{
+					echo '<div align="center">[' . project_get_name( $t_bug->project_id ) . ']</div>';
+				}
                 echo icon_get_status_icon($t_bug->priority);
-                echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink">' . string_display_line_links( $t_bug->summary ) . '</a>';
-                echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink right"> #'. $t_bug->id .'</a>';
+				if ( time() < $t_bug->last_updated + 24*60*60 ){
+					echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLinkRecent">' . string_display_line_links( $t_bug->summary ) . '</a>';
+					echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLinkRecent right"> #'. $t_bug->id .'</a>';
+				}else{
+					echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink">' . string_display_line_links( $t_bug->summary ) . '</a>';
+					echo '	<a href="' . string_get_bug_view_url( $t_bug->id) . '" class="bugLink right"> #'. $t_bug->id .'</a>';
+				}
 
                 $priority = get_enum_element( 'priority', $t_bug->priority );
                 /*
@@ -261,7 +290,17 @@ foreach($all_project_ids as $curr_project_id) {
                 if(( ON == config_get( 'show_assigned_names' ) ) && ( $t_bug->handler_id > 0 ) && user_exists($t_bug->handler_id) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $t_bug->project_id ) ) ) {
                     $emailHash = md5( strtolower( trim( user_get_email($t_bug->handler_id) ) ) );
                     echo '<div class="owner">';
-                    echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=monsterid" width="28" height="28" /></div>';
+					// Using the default avatar set in config_inc.php
+					if ( '404'		 == config_get('show_avatar') ||
+						 'mm' 		 == config_get('show_avatar') ||
+						 'identicon' == config_get('show_avatar') ||
+						 'monsterid' == config_get('show_avatar') ||
+						 'wavatar'   == config_get('show_avatar') ||
+						 'retro'     == config_get('show_avatar') ||
+						 'blank'     == config_get('show_avatar') )
+						echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=' . config_get('show_avatar') . '" width="28" height="28" /></div>';
+					else
+						echo '<div class="img-wrap"><img src="http://www.gravatar.com/avatar/'. $emailHash .'?s=28&d=monsterid" width="28" height="28" /></div>';
 
                     echo user_get_realname( $t_bug->handler_id );
                     echo '</div>';
@@ -284,6 +323,11 @@ foreach($all_project_ids as $curr_project_id) {
 }
 ?>
 </tr>
+<?php
+//Disable summary for splitted view in "All projects"
+if( helper_get_current_project() != 0 || $pdisplay != "splitted" )
+{
+?>
 <tr class="totalNums">
     <?php
     foreach($columns as $title => $column){
@@ -303,6 +347,9 @@ foreach($all_project_ids as $curr_project_id) {
     }
     ?>
 </tr>
+<?php
+}
+?>
 </table>
 </div>
 
