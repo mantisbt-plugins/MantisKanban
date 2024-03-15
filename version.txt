@@ -1,0 +1,3 @@
+Version: 2.0.0 #
+Devurl: https://github.com/mantisbt-plugins/MantisKanban/blob/main/version.txt #
+Location: https://github.com/mantisbt-plugins/MantisKanban/archive/refs/heads/main.zip #
