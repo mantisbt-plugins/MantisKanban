@@ -14,7 +14,7 @@ Released under the [GPL v3 license](http://opensource.org/licenses/GPL-3.0).
 
 ## Background
 
-This is based upon the original MantisKanban plugin which can be found here: https://github.com/thinksentient/MantisKanban
+This is based upon the original MantisKanban plugin which can be found here: https://github.com/thinksentient/MantisKanban<br>
 Since the plugin is not maintained and didn't work for MantisBT version 2.x, I have updated it
 
 ## Requirements
