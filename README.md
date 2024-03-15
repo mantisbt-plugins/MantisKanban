@@ -13,7 +13,7 @@ __Prerequisites__
 
 Note: MantisBT 1.3 is currently [not supported](https://github.com/mantisbt-plugins/MantisKanban/issues/5)
 
-A version for Mantisbt 2.x can be found under the Mantisbt2.x branch 
+A version for Mantisbt 2.x can be found under the Mantisbt2.x branch: https://github.com/mantisbt-plugins/MantisKanban/blob/MantisBT2.x
 
 __Setup__
 *   Upload the "MantisKanban" folder to your Mantis "plugins" folder
