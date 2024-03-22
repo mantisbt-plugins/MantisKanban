@@ -2,3 +2,11 @@
 
 $s_plugin_MantisKanban_main_menu_kanban = "Kanban";
 $s_plugin_MantisKanban_kanban_link = "Kanban Board View";
+$s_plugin_MantisKanban_add = "Add Kanban Group";
+$s_plugin_MantisKanban_edit= "Maintain Kanban Groups";
+$s_plugin_MantisKanban_title= "Group name";
+$s_plugin_MantisKanban_status= "Status(ses) for this group, values to be separated with a comma";
+$s_plugin_MantisKanban_order= "Sequence for displaing Kanban groups";
+$s_plugin_MantisKanban_configuration = "Plugin configuration";
+$s_show_empty = "Show empty sets";
+$s_combined = "Show combined overview of all projects involved";

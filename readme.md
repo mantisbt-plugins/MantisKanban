@@ -14,7 +14,7 @@ Released under the [GPL v3 license](http://opensource.org/licenses/GPL-3.0).
 
 ## Background
 
-This is based upon the original MantisKanban plugin which can be found here: https://github.com/thinksentient/MantisKanban<br>
+This is based upon the original MantisKanban plugin which can be found here: https://github.com/thinksentient/MantisKanban
 Since the plugin is not maintained and didn't work for MantisBT version 2.x, I have updated it
 
 ## Requirements
@@ -25,7 +25,6 @@ Since the plugin is not maintained and didn't work for MantisBT version 2.x, I h
 
 *   Upload the "MantisKanban" folder to your Mantis "plugins" folder
 *   Activate the plugin in your Mantis backend
-*   edit "pages/kanban_page.php" and define at least your desired columns  (see the "$columns" array)
 
 ## Support
 
@@ -35,3 +34,5 @@ File bug reports and submit questions on the
 ## Changelog
 
 2024-03-15	Initial release for version 2.x
+2024-03-22	Added config options so no need to adjust the code itself
+2024-03-22	Introduced combined overview option
