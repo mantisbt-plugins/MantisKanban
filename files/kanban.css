@@ -67,15 +67,7 @@ div.card div.owner img {
 	float:left; 
 	margin: 0px 8px 0 0;
 }
-div.card div.project {
-	background: #CF9;
-	float:left;
-	margin: 0 0 1px 0;
-	overflow: hidden;
-	padding: 3px 3px 3px 0;
-	text-align: center;
-	width: 106px;
-}
+
 
 div.cardOdd {
 	clear: none;
