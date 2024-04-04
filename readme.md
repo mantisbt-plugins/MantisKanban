@@ -33,6 +33,6 @@ File bug reports and submit questions on the
 
 ## Changelog
 
-2024-03-15	Initial release for version 2.x
-2024-03-22	Added config options so no need to adjust the code itself
-2024-03-22	Introduced combined overview option
+2024-03-15	Initial release for version 2.x<br>
+2024-03-22	Added config options so no need to adjust the code itself<br>
+2024-03-22	Introduced combined overview option<br>
