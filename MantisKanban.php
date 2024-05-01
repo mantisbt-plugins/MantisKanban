@@ -43,7 +43,7 @@ class MantisKanbanPlugin extends MantisPlugin {
 		$schema[] = array( 'CreateTableSQL', array( plugin_table( 'kanbangroups' ), "
 						group_id			I       NOTNULL UNSIGNED AUTOINCREMENT PRIMARY,
 						group_title			C (50)  DEFAULT NULL,
-						group_status		C (50)  DEFAULT NULL
+						group_status			C (50)  DEFAULT NULL,
 						order_id			I		NOTNULL
 						" ) );
 		return $schema;
