@@ -2,10 +2,10 @@
 
 class MantisKanbanPlugin extends MantisPlugin {
     function register() {
-        $this->name = 'Mantis Kanban';    
-        $this->description = 'A Kanban board view';    
+        $this->name = plugin_lang_get( 'kanban_name' );    
+        $this->description = plugin_lang_get( 'kanban_desc' );    
 
-        $this->version = '2.1.0';     
+        $this->version = '2.1.1';     
         $this->requires = array(    
             'MantisCore' => '2.0.0', 
             );

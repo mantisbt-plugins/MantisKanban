@@ -53,7 +53,7 @@ $t_project_id = helper_get_current_project();
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_file( 'kanban.css' ); ?>"/>
 <div id="kanbanPage">
-	<h1>Kanban Board</h1>
+	<h1><?php echo plugin_lang_get('kanban_title') ?></h1>
 <table  border="0" cellspacing="0" cellpadding="0" style="width: <?php echo $columns*250; ?>px">
 <tr>
 <?php
@@ -85,7 +85,6 @@ if ( !$t_combined ) {
 		</tr>
 		<?php	
 	
-//		foreach($columns as $title => $column){
 	$result = db_query($query);
 	while ($row = db_fetch_array($result)) {
 		$title = $row['group_title'];
@@ -94,11 +93,7 @@ if ( !$t_combined ) {
 	
 			$filter_array = array(
             'status' => $row['group_status'],
-            //'sort' => $f_sort_by,
-            //'dir' => 'DESC',
              '_view_type' => 'advanced',
-            // general filters set by user, add more if needed
-            //'category' => $t_filter['category'],
             'priority' => $t_filter['priority'],
             'handler_id' => $t_filter['handler_id'],
 			);
@@ -176,7 +171,7 @@ if ( !$t_combined ) {
 	?>
 	<tr>
         <td class="projectHeader" colspan="<?php echo $columns;?>">
-            <h1><?php echo 'Combined Overview'; ?></h1>
+            <h1><?php echo plugin_lang_get('kanban_overview') ?></h1>
         </td>
     </tr>
 	<?php	
@@ -189,11 +184,7 @@ if ( !$t_combined ) {
 	
 		$filter_array = array(
             'status' => $row['group_status'],
-            //'sort' => $f_sort_by,
-            //'dir' => 'DESC',
-             '_view_type' => 'advanced',
-            // general filters set by user, add more if needed
-            //'category' => $t_filter['category'],
+            '_view_type' => 'advanced',
             'priority' => $t_filter['priority'],
             'handler_id' => $t_filter['handler_id'],
         );

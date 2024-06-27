@@ -34,7 +34,6 @@ print_link_button( $link, plugin_lang_get( 'configuration' ) );
 </tr>
 <tr>
 <td>
-<?php //echo lang_get( 'plugin_MantisKanban_title' ) . ': ' . lang_get( 'plugin_Userdata_userdata' ) ?>
 </td>
 <td colspan="3" class="row-category"><div align="left"><a name="kanban_record"></a></div></td>
 </tr>

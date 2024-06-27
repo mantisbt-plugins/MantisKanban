@@ -1,0 +1,15 @@
+<?php
+$s_plugin_MantisKanban_main_menu_kanban = "Kanban";
+$s_plugin_MantisKanban_kanban_link = "Kanban Bord Weergave";
+$s_plugin_MantisKanban_add = "Kanban Groep Toevoegen";
+$s_plugin_MantisKanban_edit = "Kanban Groepen Beheren";
+$s_plugin_MantisKanban_title = "Groepsnaam";
+$s_plugin_MantisKanban_status = "Status(sen) voor deze groep, waarden gescheiden door een komma";
+$s_plugin_MantisKanban_order = "Volgorde voor het weergeven van Kanban groepen";
+$s_plugin_MantisKanban_configuration = "Plugin Configuratie";
+$s_show_empty = "Toon lege sets";
+$s_combined = "Toon gecombineerde overzicht van alle betrokken projecten";
+$s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
+$s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
+$s_plugin_MantisKanban_kanban_title = "Kanban Board";
+$s_plugin_MantisKanban_kanban_overveiw = "Combined Overview";

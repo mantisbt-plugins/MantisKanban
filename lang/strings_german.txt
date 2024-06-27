@@ -12,20 +12,9 @@ $s_project_groups = 'gruppieren';
 $s_sort_date_modified = 'Änderungsdatum';
 $s_sort_priority_link = 'Priorität';
 
-$s_header_column_1 = 'Nicht zugewiesen';
-$s_header_column_2 = 'Zurückgestellt';
-$s_header_column_3 = 'In Arbeit';
-$s_header_column_4 = 'Feedback';
-$s_header_column_5 = 'Test';
-$s_header_column_6 = 'Erledigt';
-$s_header_column_7 = '';
-$s_header_column_8 = '';
-
 $s_confirm_change_status = 'Jetzt Status wechseln?';
 
-$s_plugin_kanban_title = 'Kanban';
-$s_plugin_kanban_config = 'Konfiguration';
-$s_plugin_kanban_columns = 'Spalten-Einstellungen';
-$s_plugin_kanban_simple_columns = 'Jeder Status führt zu einer Spalte';
-$s_plugin_kanban_combined_columns = 'Die Status können gruppiert werden';
-
+$s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
+$s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
+$s_plugin_MantisKanban_kanban_title = "Kanban Board";
+$s_plugin_MantisKanban_kanban_overveiw = "Combined Overview";
