@@ -9,7 +9,8 @@ $s_plugin_MantisKanban_order = "Volgorde voor het weergeven van Kanban groepen";
 $s_plugin_MantisKanban_configuration = "Plugin Configuratie";
 $s_show_empty = "Toon lege sets";
 $s_combined = "Toon gecombineerde overzicht van alle betrokken projecten";
+
 $s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
-$s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
+$s_plugin_MantisKanban_kanban_desc = "Een Kanban Board overzicht";
 $s_plugin_MantisKanban_kanban_title = "Kanban Board";
-$s_plugin_MantisKanban_kanban_overveiw = "Combined Overview";
+$s_plugin_MantisKanban_kanban_overview = "Gecombineerd Overzicht";
