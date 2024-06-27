@@ -37,4 +37,4 @@ File bug reports and submit questions on the
 2024-03-22	Added config options so no need to adjust the code itself<br>
 2024-03-22	Introduced combined overview option<br>
 2024-06-27	Made last fixed text string adjustable<br>
-			Added Dutch trransalation, thanks to KoenR<br>
+			Added Dutch transalation, thanks to KoenR<br>
