@@ -12,6 +12,6 @@ $s_show_empty = "Show empty sets";
 $s_combined = "Show combined overview of all projects involved";
 
 $s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
-$s_plugin_MantisKanban_kanban_desc = "Een Kanban Board overzicht";
+$s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
 $s_plugin_MantisKanban_kanban_title = "Kanban Board";
-$s_plugin_MantisKanban_kanban_overveiw = "Gecombineerd Overzicht";
+$s_plugin_MantisKanban_kanban_overview = "Combined Overview";

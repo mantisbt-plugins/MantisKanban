@@ -17,4 +17,4 @@ $s_confirm_change_status = 'Jetzt Status wechseln?';
 $s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
 $s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
 $s_plugin_MantisKanban_kanban_title = "Kanban Board";
-$s_plugin_MantisKanban_kanban_overveiw = "Combined Overview";
+$s_plugin_MantisKanban_kanban_overview = "Combined Overview";
