@@ -13,7 +13,7 @@ $s_sort_date_modified = 'Änderungsdatum';
 $s_sort_priority_link = 'Priorität';
 
 $s_confirm_change_status = 'Jetzt Status wechseln?';
-
+$s_plugin_MantisKanban_config= "Konfiguration";
 $s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
 $s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
 $s_plugin_MantisKanban_kanban_title = "Kanban Board";
