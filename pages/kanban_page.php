@@ -182,12 +182,21 @@ if ( !$t_combined ) {
 		$title = $row['group_title'];
 		?><td><?php 
 	
-		$filter_array = array(
+	/*	$filter_array = array(
             'status' => $row['group_status'],
             '_view_type' => 'advanced',
             'priority' => $t_filter['priority'],
             'handler_id' => $t_filter['handler_id'],
         );
+		*/
+
+		$filter_array = array(
+            'status' => explode(",", $row['group_status']),
+            '_view_type' => 'advanced',
+            'priority' => $t_filter['priority'],
+            'handler_id' => $t_filter['handler_id'],
+       		 );
+		
 		$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count,$filter_array );
         $t_rowcounts[$title] = count($rows);
 	
