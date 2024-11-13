@@ -173,7 +173,7 @@ foreach($all_project_ids as $curr_project_id) {
             $t_per_page = -1;
         }
         // set custom filters, partially using the global filters defined by user
-        $filter_array = array(
+        /* $filter_array = array(
             'show_status' => $column['status'],
             'sort' => $f_sort_by,
             'dir' => 'DESC',
@@ -181,6 +181,13 @@ foreach($all_project_ids as $curr_project_id) {
             // general filters set by user, add more if needed
             'show_category' => $t_filter['show_category'],
             'show_priority' => $t_filter['show_priority'],
+            'handler_id' => $t_filter['handler_id'],
+        );
+	*/
+	     $filter_array = array(
+            'status' => explode(",", $row['group_status']),
+            '_view_type' => 'advanced',
+            'priority' => $t_filter['priority'],
             'handler_id' => $t_filter['handler_id'],
         );
 	    $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count,
