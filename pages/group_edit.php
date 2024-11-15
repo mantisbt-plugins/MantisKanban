@@ -61,6 +61,9 @@ while ($row = db_fetch_array($result)) {
 	<?php
 	$link2 = "plugin.php?page=MantisKanban/group_delete_db.php&delete_id=";
 	$link2 .= $row["group_id"];
+	$updateLink = "plugin.php?page=MantisKanban/group_update.php&edit_id=";
+	$updateLink .= $row["group_id"];
+	print_link_button( $updateLink, lang_get( 'edit' ) );
 	print_link_button( $link2, lang_get( 'delete' ) );
 	?>
 	</div></td>
