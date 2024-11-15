@@ -1,7 +1,7 @@
 
 # Mantis Kanban plugin
  
-Version 2.1.1
+Version 2.2.1
 Copyright 2024 Cas Nuy
 
 ## Description
@@ -37,4 +37,5 @@ File bug reports and submit questions on the
 2024-03-22	Added config options so no need to adjust the code itself<br>
 2024-03-22	Introduced combined overview option<br>
 2024-06-27	Made last fixed text string adjustable<br>
-			Added Dutch transalation, thanks to KoenR<br>
+2024-06-27	Added Dutch transalation, thanks to KoenR<br>
+2024-11-15      Added group edit function (thanks to Ken Guest)<br>
