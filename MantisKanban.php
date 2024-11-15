@@ -5,7 +5,7 @@ class MantisKanbanPlugin extends MantisPlugin {
         $this->name = plugin_lang_get( 'kanban_name' );    
         $this->description = plugin_lang_get( 'kanban_desc' );    
 
-        $this->version = '2.1.1';     
+        $this->version = '2.2.1';     
         $this->requires = array(    
             'MantisCore' => '2.0.0', 
             );
