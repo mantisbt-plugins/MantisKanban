@@ -28,6 +28,10 @@ Since the plugin is not maintained and didn't work for MantisBT version 2.x, I h
 *   Configure your board 
 *	Ready to roll
 
+## Configuration
+
+When defining the statuses withineach group, bear in mind you need to use the codes (10,20 and so on) and not the descriptive names)
+
 ## Support
 
 File bug reports and submit questions on the
