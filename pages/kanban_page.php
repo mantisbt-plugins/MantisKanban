@@ -63,7 +63,7 @@ $columns=db_num_rows($result);
 	
 <form action="<?php echo plugin_page( 'config_edit2' ) ?>" method="post">
 </table>
-<table  border="1" cellspacing="0" cellpadding="0" style="width: <?php echo $columns*250; ?>px">
+<table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
 <tr >
 <td class="category" >
 <?php echo lang_get( 'show_empty' )?>
@@ -126,7 +126,7 @@ if ( !$t_combined ) {
 	while ($row = db_fetch_array($result)) {
 		$title = $row['group_title'];
 			$t_per_page = -1;
-			?><td><?php 
+			?><td style="vertical-align:top"><?php 
 	
 			$filter_array = array(
              'status' => explode(",", $row['group_status']),
@@ -218,7 +218,7 @@ if ( !$t_combined ) {
 	while ($row = db_fetch_array($result)) {
 		$t_per_page = -1;
 		$title = $row['group_title'];
-		?><td><?php 
+		?><td style="vertical-align:top"><?php 
 	/*
 		$filter_array = array(
             'status' => $row['group_status'],
