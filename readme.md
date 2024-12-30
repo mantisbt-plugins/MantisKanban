@@ -37,6 +37,9 @@ When defining the statuses withineach group, bear in mind you need to use the co
 File bug reports and submit questions on the
 [GitHub issues tracker](http://github.com/mantisbt-plugins/MantisKanban/issues).
 
+## Thanks
+Thanks to Sparkxy for a cosmetic improvement
+
 ## Changelog
 
 2024-03-15	Initial release for version 2.x<br>
