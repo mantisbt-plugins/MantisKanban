@@ -62,7 +62,6 @@ $columns=db_num_rows($result);
 	<h1><?php echo plugin_lang_get('kanban_title') ?></h1>
 	
 <form action="<?php echo plugin_page( 'config_edit2' ) ?>" method="post">
-</table>
 <table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
 <tr >
 <td class="category" >
@@ -90,7 +89,9 @@ $columns=db_num_rows($result);
 <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' )?>" />
 </td>
 </tr> 
+</table>
 </form>
+<table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
 
 <tr>
 <?php
