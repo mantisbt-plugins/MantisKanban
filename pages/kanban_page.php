@@ -86,11 +86,14 @@ $columns=db_num_rows($result);
 <?php echo lang_get( 'disabled' )?></label>
 </td>
 <td>
+<center>
 <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' )?>" />
+</center>
 </td>
 </tr> 
 </table>
 </form>
+<br>
 <table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
 
 <tr>
