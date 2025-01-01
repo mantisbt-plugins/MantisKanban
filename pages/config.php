@@ -62,7 +62,7 @@ print_link_button( $link2, plugin_lang_get( 'edit' ) );
 
 <tr >
 <td class="category" width="60%">
-<?php echo lang_get( 'allowed' )?>
+<?php echo plugin_lang_get( 'allowed' )?>
 </td>
 <td class="center" width="20%">
 <label><input type="radio" name='allowed' value="1" <?php echo( ON == plugin_config_get( 'allowed' ) ) ? 'checked="checked" ' : ''?>/>
