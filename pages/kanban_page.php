@@ -60,40 +60,45 @@ $columns=db_num_rows($result);
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_file( 'kanban.css' ); ?>"/>
 <div id="kanbanPage">
 	<h1><?php echo plugin_lang_get('kanban_title') ?></h1>
-	
-<form action="<?php echo plugin_page( 'config_edit2' ) ?>" method="post">
-<table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
-<tr >
-<td class="category" >
-<?php echo lang_get( 'show_empty' )?>
-</td>
-<td class="center" >
-<label><input type="radio" name='show_empty' value="1" <?php echo( ON == plugin_config_get( 'show_empty' ) ) ? 'checked="checked" ' : ''?>/>
-<?php echo lang_get( 'enabled' )?></label>
+<?php
+if ( ON == plugin_config_get( 'allowed' )  ) {
+?>
+	<form action="<?php echo plugin_page( 'config_edit2' ) ?>" method="post">
+	<table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
+	<tr >
+	<td class="category" >
+	<?php echo lang_get( 'show_empty' )?>
+	</td>
+	<td class="center" >
+	<label><input type="radio" name='show_empty' value="1" <?php echo( ON == plugin_config_get( 'show_empty' ) ) ? 'checked="checked" ' : ''?>/>
+	<?php echo lang_get( 'enabled' )?></label>
 
-<label><input type="radio" name='show_empty' value="0" <?php echo( OFF == plugin_config_get( 'show_empty' ) )? 'checked="checked" ' : ''?>/>
-<?php echo lang_get( 'disabled' )?></label>
-</td>
+	<label><input type="radio" name='show_empty' value="0" <?php echo( OFF == plugin_config_get( 'show_empty' ) )? 'checked="checked" ' : ''?>/>
+	<?php echo lang_get( 'disabled' )?></label>
+	</td>
 
-<td class="category" >
-<?php echo lang_get( 'combined' )?>
-</td>
-<td class="center" >
-<label><input type="radio" name='combined' value="1" <?php echo( ON == plugin_config_get( 'combined' ) ) ? 'checked="checked" ' : ''?>/>
-<?php echo lang_get( 'enabled' )?></label>
+	<td class="category" >
+	<?php echo lang_get( 'combined' )?>
+	</td>
+	<td class="center" >
+	<label><input type="radio" name='combined' value="1" <?php echo( ON == plugin_config_get( 'combined' ) ) ? 'checked="checked" ' : ''?>/>
+	<?php echo lang_get( 'enabled' )?></label>
 
-<label><input type="radio" name='combined' value="0" <?php echo( OFF == plugin_config_get( 'combined' ) )? 'checked="checked" ' : ''?>/>
-<?php echo lang_get( 'disabled' )?></label>
-</td>
-<td>
-<center>
-<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' )?>" />
-</center>
-</td>
-</tr> 
-</table>
-</form>
-<br>
+	<label><input type="radio" name='combined' value="0" <?php echo( OFF == plugin_config_get( 'combined' ) )? 'checked="checked" ' : ''?>/>
+	<?php echo lang_get( 'disabled' )?></label>
+	</td>
+	<td>
+	<center>
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' )?>" />
+	</center>
+	</td>
+	</tr> 
+	</table>
+	</form>
+	<br>
+<?php
+}
+?>
 <table  border="1" cellspacing="0" cellpadding="0" style="width: 100% ">
 
 <tr>

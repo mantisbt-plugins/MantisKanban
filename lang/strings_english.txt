@@ -15,3 +15,4 @@ $s_plugin_MantisKanban_kanban_name = "Mantis Kanban Board";
 $s_plugin_MantisKanban_kanban_desc = "A Kanban Board view";
 $s_plugin_MantisKanban_kanban_title = "Kanban Board";
 $s_plugin_MantisKanban_kanban_overview = "Combined Overview";
+$s_plugin_MantisKanban_allowed = "Allow users to adjust operational settings";

@@ -7,7 +7,7 @@ class MantisKanbanPlugin extends MantisPlugin {
         $this->name = 'Mantis Kanban';    # Proper name of plugin
         $this->description = 'A Kanban board view';    # Short description of the plugin
 
-        $this->version = '2.2.2';     # Plugin version string
+        $this->version = '2.3.0';     # Plugin version string
         $this->requires = array(    # Plugin dependencies, array of basename => version pairs
             'MantisCore' => '2.0.0',  #   Should always depend on an appropriate version of MantisBT
             );
@@ -21,6 +21,7 @@ class MantisKanbanPlugin extends MantisPlugin {
 		return array(
 			'show_empty'		=> OFF,
 			'combined'			=> ON,
+			'allowed'			=> ON,
 			);
 	}
 	    

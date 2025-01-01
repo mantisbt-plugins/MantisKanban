@@ -1,7 +1,7 @@
 
 # Mantis Kanban plugin
  
-Version 2.2.2
+Version 2.3.0
 Copyright 2024 Cas Nuy
 
 ## Description
@@ -38,7 +38,7 @@ File bug reports and submit questions on the
 [GitHub issues tracker](http://github.com/mantisbt-plugins/MantisKanban/issues).
 
 ## Thanks
-Thanks to Sparkxy for a cosmetic improvement
+Thanks to Sparkxy for a cosmetic improvement (2024-12-31)
 
 ## Changelog
 
@@ -49,4 +49,5 @@ Thanks to Sparkxy for a cosmetic improvement
 2024-06-27	Added Dutch transalation, thanks to KoenR<br>
 2024-11-15  Added group edit function (thanks to Ken Guest)<br>
 2024-11-16	Added interactive changing of parameters and table borders<br>
-2024-12-31 Cosmetic improvements to the Kanban page
+2024-12-31  Cosmetic improvements to the Kanban page<br>
+2025-01-01	Added option to control user updating of the settings<br>
